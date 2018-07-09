@@ -6,9 +6,10 @@ import Vuex from 'vuex';
 import store from './store/index.js'
 import BatchMaster from './api/BatchMaster';
 
-
+console.log(BatchMaster);
 window.BM = new BatchMaster();
-
+console.log(BM);
+console.log(BM.request);
 Vue.use(Vuex);
 Vue.config.productionTip = false;
 
@@ -23,11 +24,14 @@ const app = new Vue({
   el: '#app',
   store,
   created () {
-    console.log('created');
+  },
+  beforeMount () {
+
   },
   mounted () {
-    window.BM.setRequestCount(this.$children.length);
-    console.log('mounted');
-    console.log(this);
+    window.BM.setRequestCount(this.$children.filter(item => item.dynamic).length);
+    console.log(this.$children);
+    var event = new Event('vue_mounted');
+    document.dispatchEvent(event);
   }
 });

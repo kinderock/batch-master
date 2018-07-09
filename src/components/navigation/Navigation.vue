@@ -11,14 +11,17 @@ export default {
 
   data() {
     return {
-      items: ["Item 1", "Item 2", "Item 3"]
+      items: ["Item 1", "Item 2", "Item 3"],
+      dynamic : true
     };
   },
 
   created() {
-    window.BM.request({'navigation':'bar'}).then((response) => {
-      console.log(response);
-    });
+    document.addEventListener('vue_mounted', () => {
+      BM.request({'navigation': 'zzz'}).then(response => {
+        console.log('response', response);
+      });
+    }, false);
   }
 };
 </script>

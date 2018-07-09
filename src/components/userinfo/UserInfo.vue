@@ -13,14 +13,19 @@ export default {
   components: {ChildUserInfo},
   data() {
     return {
+      dynamic : false
 
     };
   },
 
   created() {
-    window.BM.request({'userinfo':'bar'}).then((response) => {
-      console.log(response);
-    });
+    /*
+    document.addEventListener('vue_mounted', () => {
+      BM.request({'userinfo': 'zzz'}).then(response => {
+        console.log('response', response);
+      });
+    }, false);
+    */
   }
 };
 </script>
