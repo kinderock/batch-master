@@ -1,10 +1,14 @@
 <template>
-  <div>Child user info</div>
+  <div>Имя пользователя: {{ name }}</div>
 </template>
 
 <script>
   export default {
     name: "ChildUserInfo",
+
+    props: {
+      name: String
+    },
 
     data() {
       return {
@@ -13,7 +17,7 @@
     },
 
     created() {
-      console.log('Child user info');
+      
     }
   };
 </script>

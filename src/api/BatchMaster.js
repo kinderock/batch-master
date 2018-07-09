@@ -1,6 +1,5 @@
 const api_request = function(request_data) {
   return new Promise ((resolve, reject) => {
-    console.log('api_request');
     resolve(request_data);
   });
 }
@@ -12,35 +11,46 @@ class BatchMaster {
     this.promise = false;
     this.resolve = false;
   }
-  setRequestCount (count) {
+
+  setRequestCount(count) {
     this.request_count = count;
   }
+
   request(request_data) {
     this.addToQueue(request_data);
     return this.getPromise();
-
   }
-  getPromise () {
+
+  getPromise() {
     if (!this.promise) {
       this.promise =  new Promise((resolve, reject) => {
         this.resolve = resolve;
       });
     }
-    console.log(this.promise);
+
     return this.promise;
   }
-  addToQueue (request) {
+
+  addToQueue(request) {
     this.queue.push(request);
-    console.log('request_count', this.request_count);
+
     if (this.queue.length === this.request_count) {
-      console.log('FINISH');
       this.sendInitRequest();
     }
   }
-  sendInitRequest () {
+
+  sendInitRequest() {
     api_request(this.queue).then((result) => {
       this.resolve(result);
     });
+  }
+
+  getCurrentComponentData(component, response) {
+    let result = response.filter((item) => {
+      return item.component === component
+    })[0].data;
+
+    return result;
   }
 }
 

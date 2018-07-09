@@ -1,26 +1,43 @@
 <template>
   <ul>
-    <!-- <li>asdasd</li> -->
-    <li v-for="item in items">{{ item }}</li>
+    <li v-for="item in getNavigationItems">{{ item }}</li>
   </ul>
 </template>
 
 <script>
+import navigation from '../../store/navigation/index';
+
 export default {
   name: "Navigation",
 
   data() {
     return {
-      items: ["Item 1", "Item 2", "Item 3"],
       dynamic: true
     };
   },
 
+  computed: {
+    getNavigationItems() {
+      return this.$store.state.navigation.items
+    }
+  },
+
 
   created() {
-    document.addEventListener('vue_mounted', () => {
-      BM.request({'navigation': 'zzz'}).then(response => {
-        console.log('response', response);
+    let request_data = {
+      component: 'navigation',
+      method: 'pleaseMakeSomething',
+      data: {
+        items: ["Главная", "Об игре", "Пополнить счет"]
+      }
+    };
+
+    this.$store.registerModule('navigation', navigation);
+
+    document.addEventListener('InitVueComponents', () => {
+      BM.request(request_data).then(response => {
+        let data = BM.getCurrentComponentData('navigation', response);
+        this.$store.commit('navigation/setMenuItems', data.items);
       });
     }, false);
   }

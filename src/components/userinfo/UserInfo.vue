@@ -1,30 +1,54 @@
 <template>
   <div>
-    <p>User Info</p>
-    <ChildUserInfo/>
+    <p>Статус пользоватея: {{ getUserStatus }}</p>
+    <ChildUserInfo :name="getUserName"/>
   </div>
 
 </template>
 
 <script>
+import user from '../../store/user/index';
+
 import ChildUserInfo from "./blocks/ChildUserInfo";
 export default {
   name: "Userinfo",
   components: {ChildUserInfo},
   data() {
     return {
-      dynamic: false
+      dynamic: true
     };
   },
 
+  computed: {
+    getUserStatus() {
+      return this.$store.state.user.status
+    },
+
+    getUserName() {
+      return this.$store.state.user.name
+    }
+  },
+
   created() {
-    /*
-    document.addEventListener('vue_mounted', () => {
-      BM.request({'userinfo': 'zzz'}).then(response => {
-        console.log('response', response);
+    let request_data = {
+      component: 'user',
+      method: 'pleaseMakeSomething',
+      data: {
+        status: 'member',
+        name: 'John Doe'
+      }
+    };
+
+    this.$store.registerModule('user', user);
+
+    document.addEventListener('InitVueComponents', () => {
+      BM.request(request_data).then(response => {
+        let data = BM.getCurrentComponentData('user', response);
+
+        this.$store.commit('user/setUserStatus', data.status);
+        this.$store.commit('user/setUserName', data.name);
       });
     }, false);
-    */
   }
 };
 </script>
