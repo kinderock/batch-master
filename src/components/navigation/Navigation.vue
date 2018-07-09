@@ -15,10 +15,18 @@ export default {
     };
   },
 
-  created() {
-    window.BM.request({'navigation':'bar'}).then((response) => {
-      console.log(response);
+  mounted() {
+    // console.log('BM -', BM);
+    // window.BM.request({'navigation':'bar'});
+    window.addEventListener('InitVueComponents', () => {
+      this.sendRequest();
     });
+  },
+
+  methods: {
+    sendRequest() {
+      window.BM.request({'navigation':'bar'});
+    }
   }
 };
 </script>

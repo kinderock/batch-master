@@ -7,11 +7,15 @@ class BatchMaster {
     this.request_count = count;
   }
   request(request_data) {
-    this.addToQueue(request);
+    this.addToQueue(request_data);
+    console.log();
   }
   addToQueue (request) {
     this.queue.push(request);
+    console.log('this.request_count', this.request_count);
+    console.log('this.queue', this.queue);
     if (this.queue.length === this.request_count) {
+      console.log('FINISH');
       this.sendInitRequest();
     }
   }
@@ -22,8 +26,6 @@ class BatchMaster {
       }, 100);
     });
   }
-
-
 }
 
 export default BatchMaster;

@@ -17,10 +17,17 @@ export default {
     };
   },
 
-  created() {
-    window.BM.request({'userinfo':'bar'}).then((response) => {
-      console.log(response);
+  mounted() {
+    // window.BM.request({'userinfo':'bar'});
+    window.addEventListener('InitVueComponents', () => {
+      this.sendRequest();
     });
+  },
+
+  methods: {
+    sendRequest() {
+      window.BM.request({'userinfo':'bar'});
+    }
   }
 };
 </script>
