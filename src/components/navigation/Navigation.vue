@@ -16,9 +16,9 @@ export default {
   },
 
   created() {
-    console.log('this --', this);
-    console.log('window --', window);
-    console.log('BM --', BM);
+    window.BM.request({'navigation':'bar'}).then((response) => {
+      console.log(response);
+    });
   }
 };
 </script>
