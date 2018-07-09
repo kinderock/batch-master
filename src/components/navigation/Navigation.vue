@@ -11,22 +11,18 @@ export default {
 
   data() {
     return {
-      items: ["Item 1", "Item 2", "Item 3"]
+      items: ["Item 1", "Item 2", "Item 3"],
+      dynamic: true
     };
   },
 
-  mounted() {
-    // console.log('BM -', BM);
-    // window.BM.request({'navigation':'bar'});
-    window.addEventListener('InitVueComponents', () => {
-      this.sendRequest();
-    });
-  },
 
-  methods: {
-    sendRequest() {
-      window.BM.request({'navigation':'bar'});
-    }
+  created() {
+    document.addEventListener('vue_mounted', () => {
+      BM.request({'navigation': 'zzz'}).then(response => {
+        console.log('response', response);
+      });
+    }, false);
   }
 };
 </script>

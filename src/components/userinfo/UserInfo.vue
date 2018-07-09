@@ -13,21 +13,18 @@ export default {
   components: {ChildUserInfo},
   data() {
     return {
-
+      dynamic: false
     };
   },
 
-  mounted() {
-    // window.BM.request({'userinfo':'bar'});
-    window.addEventListener('InitVueComponents', () => {
-      this.sendRequest();
-    });
-  },
-
-  methods: {
-    sendRequest() {
-      window.BM.request({'userinfo':'bar'});
-    }
+  created() {
+    /*
+    document.addEventListener('vue_mounted', () => {
+      BM.request({'userinfo': 'zzz'}).then(response => {
+        console.log('response', response);
+      });
+    }, false);
+    */
   }
 };
 </script>
