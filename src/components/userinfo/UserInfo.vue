@@ -42,8 +42,8 @@ export default {
     this.$store.registerModule('user', user);
 
     document.addEventListener('InitVueComponents', () => {
-      BM.request(request_data).then(response => {
-        let data = BM.getCurrentComponentData('user', response);
+      this.$batchMaster.request(request_data).then(response => {
+        let data = this.$batchMaster.getCurrentComponentData('user', response);
 
         this.$store.commit('user/setUserStatus', data.status);
         this.$store.commit('user/setUserName', data.name);

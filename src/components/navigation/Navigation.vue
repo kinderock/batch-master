@@ -35,8 +35,8 @@ export default {
     this.$store.registerModule('navigation', navigation);
 
     document.addEventListener('InitVueComponents', () => {
-      BM.request(request_data).then(response => {
-        let data = BM.getCurrentComponentData('navigation', response);
+      this.$batchMaster.request(request_data).then(response => {
+        let data = this.$batchMaster.getCurrentComponentData('navigation', response);
         this.$store.commit('navigation/setMenuItems', data.items);
       });
     }, false);

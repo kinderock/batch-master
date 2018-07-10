@@ -2,7 +2,7 @@ const api_request = function(request_data) {
   return new Promise ((resolve, reject) => {
     resolve(request_data);
   });
-}
+};
 
 class BatchMaster {
   constructor() {
@@ -54,4 +54,4 @@ class BatchMaster {
   }
 }
 
-export default BatchMaster;
+export default new BatchMaster();
